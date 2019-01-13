@@ -1,0 +1,9 @@
+table=0,dl_src=ff:ff:ff:ff:ff:ff/ff:ff:ff:ff:ff:ff, actions=drop
+table=0,dl_src=01:80:c2:00:00:00/01:80:c2:00:00:00, actions=drop
+table=0,dl_src=01:00:0c:cc:cc:cd/01:00:0c:cc:cc:cd, actions=drop
+table=0,priority=0, actions=resubmit(,1)
+table=1,dl_src=00:00:00:00:00:03, actions=mod_vlan_vid:10,output:1
+table=1,dl_src=00:00:00:00:00:04, actions=mod_vlan_vid:20,output:1
+table=1,priority=0, actions=resubmit(,2)
+table=2,dl_vlan=10, actions=strip_vlan,output:2
+table=2,dl_vlan=20, actions=strip_vlan,output:3
